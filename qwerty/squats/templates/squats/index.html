@@ -1,0 +1,68 @@
+<!-- squats/templates/squats/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squat Rep Counter</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #video-container {
+            max-width: 720px;  /* Set your desired maximum width */
+            width: 100%;
+            text-align: center;
+        }
+
+        #video-feed {
+            width: 100%;
+        }
+
+        #squat-counter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 18px;
+        }
+
+        #toggle-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="squat-counter">Squat Rep Counter</h1>
+
+    <div id="video-container">
+        <img id="video-feed" src="{% url 'video_feed' %}" alt="Video Feed">
+    </div>
+
+    <button id="toggle-btn">Start/Stop</button>
+
+    <script>
+        var isStreaming = true;
+
+        document.getElementById("toggle-btn").addEventListener("click", function() {
+            isStreaming = !isStreaming;
+
+            if (isStreaming) {
+                document.getElementById("video-feed").src = "{% url 'video_feed' %}";
+            } else {
+                document.getElementById("video-feed").src = "";
+            }
+        });
+    </script>
+</body>
+</html>
